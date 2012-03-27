@@ -39,14 +39,20 @@ public class WebService {
 
 	protected PApplet p;
 	
-	protected boolean DEBUG = false;
+	protected boolean DEBUG = true;
 	
 	protected XML getXML( String url, String fileName )
 	{
+		p.println( "getXML()" );
+		p.println( "URL: " + url );
+		
 		XML xml = null;
+		
+		// load cached file???
 		if ( fileName != null ) {
 			try {
 				xml = p.loadXML( fileName );
+				p.println( "Try Loding XML..." );
 				
 			} catch (Exception e) {	
 				// DO SOMETHING ???
@@ -57,7 +63,7 @@ public class WebService {
 		if ( xml == null ) {
 			
 			if ( DEBUG == true ) {
-				p.println( url );
+				p.println( "getXML() URL: " + url );
 			}
 			
 			xml = p.loadXML( url );
@@ -68,6 +74,7 @@ public class WebService {
 			
 			if ( fileName != null ) {
 				try {
+					// write xml to cache file.
 					PrintWriter xmlFile = new PrintWriter( new OutputStreamWriter( new FileOutputStream( fileName + ".xml" ), "UTF-8" ) );
 					// XMLWriter writer = new XMLWriter( xmlFile );
 				} catch ( IOException e ) {
@@ -81,6 +88,8 @@ public class WebService {
 	
 	protected void printXML( String url )
 	{
+		p.println( "printXML()" );
+		
 		String lines[] = p.loadStrings( url );
 		for ( int i = 0; i < lines.length; i++ ) {
 			p.println( lines[i] );
