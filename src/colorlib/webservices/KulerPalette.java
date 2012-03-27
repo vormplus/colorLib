@@ -32,8 +32,9 @@ import colorlib.Palette;
 
 public class KulerPalette extends Palette {
 
-	public KulerPalette( final PApplet parent )
+	public KulerPalette( final PApplet parent , final int[] colors )
 	{
-		super( parent ); // call Palette()
+		// call Palette()
+		super( parent, colors );
 	}
 }
