@@ -35,21 +35,45 @@ public class Palette {
 	protected PApplet p;
 	protected ArrayList<Swatch> swatches;
 	
+	/**
+	 * Creates an empty Palette object.
+	 * @param parent reference to the main PApplet object.
+	 */
+	
 	public Palette( final PApplet parent )
 	{
 		p = parent;
 		swatches = new ArrayList<Swatch>();
+		
+		p.println( "Standard Palette created" );
 	}
 	
+	/**
+	 * Creates a Palette object from an array of colors.
+	 * @param parent reference to the main PApplet object.
+	 * @param colors Array of Processing colors.
+	 */
+
 	public Palette( final PApplet parent, int[] colors )
 	{
 		p = parent;
 		swatches = new ArrayList<Swatch>();
 		
+		addColors( colors );
+		
+		/*
 		for ( int i = 0; i < colors.length; i++ ) {
 			swatches.add( new Swatch( p, colors[i] ) );
-		}
+		} */
+
+		p.println( "Palette from colors array created" );
 	}
+	
+	/**
+	 * Creates a Palette object based on an image. Duplicate colors are removed.
+	 * @param parent reference to the main PApplet object.
+	 * @param img a Processing image.
+	 */
 	
 	public Palette( final PApplet parent, final PImage img )
 	{
@@ -64,11 +88,20 @@ public class Palette {
 		removeDuplicateSwatches();
 	}
 	
+	/**
+	 * Adds a color to the Palette.
+	 * @param color a Processing color.
+	 */
 	
 	public void addColor( final int color )
 	{
 		swatches.add( new Swatch( p, color ) );
 	}
+
+	/**
+	 * Adds colors to the Palette.
+	 * @param colors an array of Processing colors.
+	 */
 	
 	public void addColors( final int[] colors )
 	{
@@ -77,10 +110,46 @@ public class Palette {
 		}
 	}
 	
+	/**
+	 * Removes duplicate colors from the Palette
+s	 */
+	
 	public void removeDuplicateSwatches()
 	{
 		
 	}
 	
+	/**
+	 * Draws all color swatches of the Palette to the screen.
+	 */
+	
+	public void drawSwatches()
+	{
+		drawSwatches( 120, 40 );	
+	}
+	
+	/**
+	 * Draws all color swatches of the Palette to the screen.
+	 * @param w Width of the Palette
+	 * @param h Height of the Palette
+	 */
+
+	public void drawSwatches( final float w, final float h )
+	{
+
+		float swatchWidth = w / (float)swatches.size();
+		
+		int counter = 0;
+		
+		for ( Swatch s : swatches ) {
+			
+			p.fill( s.getColor() );
+			p.noStroke();
+			p.rect( swatchWidth * counter, 0, swatchWidth, h );
+			
+			counter++;
+		}
+		
+	}
 	
 }
