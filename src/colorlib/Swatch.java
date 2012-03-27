@@ -139,7 +139,50 @@ public class Swatch {
 	public void setColor( final int color )
 	{
 		c = color;
+	}
+	
+	public void rotateRGB( final float angle )
+	{
+		
 		
 	}
 	
+	public void rotateRYB( final float angle )
+	{
+		
+		
+	}
+	
+	
+	public String getNearestHue()
+	{
+		
+		return "Hue...";
+	}
+	
+
+	public float brightnessDiff( final int color )
+	{
+		
+		return 0.0f;
+	}
+	
+	public float brightnessDiff( final Swatch swatch )
+	{
+		return brightnessDiff( swatch.getColor() );
+		
+	}
+
+	public float colorDiff( final int color )
+	{
+		return 0.0f;
+		
+	}
+
+	public float colorDiff( final Swatch swatch )
+	{
+		return colorDiff( swatch.getColor() );
+		
+	}
+
 }
