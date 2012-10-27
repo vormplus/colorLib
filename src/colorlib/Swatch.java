@@ -34,6 +34,10 @@ public class Swatch {
 	protected PApplet p;
 	private int c;
 	
+	/**
+	 * Creates an empty Swatch object.
+	 * @param parent reference to the main PApplet object.
+	 */
 	public Swatch( final PApplet parent )
 	{
 		p = parent;
@@ -42,12 +46,21 @@ public class Swatch {
 				       p.random( p.g.colorModeZ ) );
 	}
 	
+	/**
+	 * Creates a Swatch object with a specified color.
+	 * @param parent reference to the main PApplet object.
+	 * @param color	specified color.
+	 */
 	public Swatch( final PApplet parent, final int color )
 	{
 		p = parent;
 		c = color;	
 	}
 	
+	/**
+	 * Returns the CMYK black value based on the formula ...
+	 * @return
+	 */
 	public float black()
 	{
 		return PApplet.min( 1 - ((c >> 16) & 0xFF) / 255.0f,
@@ -55,37 +68,63 @@ public class Swatch {
 				            1 - ((c) & 0xFF) / 255.0f );
 	}
 	
+	/**
+	 * Returns the CMYK cyan value based on the formula ...
+	 * @return
+	 */
 	public float cyan()
 	{
 		return ( 1 - ((c >> 16) & 0xFF) / 255.0f - black()) / (1 - black() );	
 	}
 	
+	/**
+	 * Returns the CMYK magenta value based on the formula ...
+	 * @return
+	 */
 	public float magenta()
 	{
 		return ( 1 - ((c >> 8) & 0xFF) / 255.0f - black()) / (1 - black() );
 	}
 	
+	/**
+	 * Returns the CMYK yellow value based on the formula ...
+	 * @return
+	 */
 	public float yellow()
 	{
 		return ( 1 - ((c) & 0xFF) / 255.0f - black()) / (1 - black() );
 	}
 	
+	
+	/**
+	 * Darkens the color
+	 */
 	public void darken()
 	{
 		lighten( -10.0f );
 	}
 	
+	/**
+	 * Darkens the color based on a specific amount
+	 */
 	public void darken( float amount )
 	{
 		lighten( -amount );
 	}
 	
+	/**
+	 * Lightens the color
+	 */
 	public void lighten()
 	{
 		
 		lighten( 10.0f );
 	}
 	
+	/**
+	 * Lightens the color by a specific amount
+	 * @param amount
+	 */
 	public void lighten( final float amount )
 	{
 		c = setHSBColor( p.hue( c ),
@@ -94,24 +133,38 @@ public class Swatch {
 				         p.alpha( c ) );
 	}
 	
+	/**
+	 * Desaturates the color
+	 */
 	public void desaturate()
 	{
 		saturate( -10.0f );
 		
 	}
 	
+	/**
+	 * Desaturates the color by a specified amount
+	 * @param amount
+	 */
 	public void desaturate( final float amount )
 	{
 		saturate( -amount );
 		
 	}
 	
+	/**
+	 * Saturates the color
+	 */
 	public void saturate()
 	{
 		saturate( 10.0f );
 		
 	}
 	
+	/**
+	 * Saturates the color by a specified amount
+	 * @param amount
+	 */
 	public void saturate( final float amount )
 	{
 		c = setHSBColor( p.hue( c ),
@@ -139,12 +192,22 @@ public class Swatch {
 		
 	}
 	
+	/**
+	 * Returns the color of the Swatch
+	 * @return
+	 */
+	
 	public int getColor()
 	{
 		return c;
-		
 	}
 	
+	
+	/**
+	 * Returns the transparent color of the Swatch
+	 * @param alpha Alpha value of the color. This should be a number between 0 and 100
+	 * @return
+	 */
 	public int getTransparentColor( int alpha )
 	{
 		int r = ( c >> 16 ) & 0xff;
@@ -163,6 +226,10 @@ public class Swatch {
 		return transparentColor;
 	}
 	
+	/**
+	 * Sets the color of the swatch. Be careful if your swatch already has a color. This will overwrite it.
+	 * @param color
+	 */
 	public void setColor( final int color )
 	{
 		c = color;
