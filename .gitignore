@@ -1,0 +1,8 @@
+# Java stuff
+*.class
+*.jar
+
+# Eclipse stuff
+*.classpath
+*.project
+*.settings
