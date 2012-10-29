@@ -6,3 +6,6 @@
 *.classpath
 *.project
 *.settings
+
+# Compiled library stuff
+*.zip
