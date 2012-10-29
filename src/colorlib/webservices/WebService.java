@@ -29,71 +29,197 @@ package colorlib.webservices;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.stream.*;
+
 
 import processing.core.*;
 
-
-public class WebService {
+abstract class WebService
+{
 
 	protected PApplet p;
 	
 	protected boolean DEBUG = true;
 	
-	protected XML getXML( String url, String fileName )
+	protected URL url = null;
+	
+	protected WebService()
 	{
-		p.println( "getXML()" );
-		p.println( "URL: " + url );
 		
-		XML xml = null;
-		
-		// load cached file???
-		if ( fileName != null ) {
-			try {
-				xml = p.loadXML( fileName );
-				p.println( "Try Loding XML..." );
-				
-			} catch (Exception e) {	
-				// DO SOMETHING ???
-			}
-			
-		}
-		
-		if ( xml == null ) {
-			
-			if ( DEBUG == true ) {
-				p.println( "getXML() URL: " + url );
-			}
-			
-			xml = p.loadXML( url );
-			
-			if ( DEBUG == true ) {
-				printXML( url.toString() );
-			}
-			
-			if ( fileName != null ) {
-				try {
-					// write xml to cache file.
-					PrintWriter xmlFile = new PrintWriter( new OutputStreamWriter( new FileOutputStream( fileName + ".xml" ), "UTF-8" ) );
-					// XMLWriter writer = new XMLWriter( xmlFile );
-				} catch ( IOException e ) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return xml;
 	}
 	
+	protected NodeList getXML( String feedURL ) //, String fileName )
+	{
+		try {
+			url = new URL( feedURL );
+		} catch ( MalformedURLException e ) {
+			throw new RuntimeException( e );
+		}
+		
+		InputStream feed = getFeed();		
+		NodeList root = null;
+		
+		try {
+			
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse( feed );
+			
+			root = doc.getChildNodes();
+			
+		} catch( Exception e ) {
+			e.printStackTrace();
+		}
+		
+		return root;
+		
+	}
+	
+	/**
+	 * Helper function to work get the XML data.
+	 * @param tagName
+	 * @param nodes
+	 * @return
+	 */
+	private InputStream getFeed()
+	{
+		try {
+			return url.openStream();
+		} catch ( IOException e ) {
+			throw new RuntimeException( e );
+		}
+	}
+
+	/**
+	 * Print XML file to console
+	 * @param url
+	 */
 	protected void printXML( String url )
 	{
+		//TODO: rewrite this ...
 		p.println( "printXML()" );
+		p.println( "---------------------------------" );
 		
 		String lines[] = p.loadStrings( url );
 		for ( int i = 0; i < lines.length; i++ ) {
 			p.println( lines[i] );
 		}
+	}
+	
+	/**
+	 * Helper function to work with XML data.
+	 * @param tagName
+	 * @param nodes
+	 * @return
+	 */
+	protected Node getNode( String tagName, NodeList nodes )
+	{
+		for ( int i = 0; i < nodes.getLength(); i++ ) {
+			Node node = nodes.item( i );
+			if ( node.getNodeName().equalsIgnoreCase( tagName ) ) {
+				return node;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Helper function to work with XML data.
+	 * @param node
+	 * @return
+	 */
+	protected String getNodeValue( Node node )
+	{
+		NodeList childNodes = node.getChildNodes();
+		for ( int i = 0; i < childNodes.getLength(); i++ ) {
+			Node data = childNodes.item( i );
+			if ( data.getNodeType() == Node.TEXT_NODE ) {
+				return data.getNodeValue();
+			}
+		}
+		
+		return "";
+	}
+
+	/**
+	 * Helper function to work with XML data.
+	 * @param tagName
+	 * @param nodes
+	 * @return
+	 */
+	protected String getNodeValue( String tagName, NodeList nodes )
+	{
+		for ( int i = 0; i < nodes.getLength(); i++ ) {
+			Node node = nodes.item( i );
+			if ( node.getNodeName().equalsIgnoreCase( tagName ) ) {
+				NodeList childNodes = node.getChildNodes();
+				for ( int j = 0; j < childNodes.getLength(); j++ ) {
+					Node data = childNodes.item( j );
+					if ( data.getNodeType() == Node.TEXT_NODE ) {
+						return data.getNodeValue();
+					}
+				}
+			}
+		}
+		
+		return "";
+	}
+	
+	/**
+	 * Helper function to work with XML data.
+	 * @param attrName
+	 * @param node
+	 * @return
+	 */
+	protected String getNodeAttr( String attrName, Node node )
+	{
+		NamedNodeMap attrs = node.getAttributes();
+		for ( int i = 0; i < attrs.getLength(); i++ ) {
+			Node attr = attrs.item( i );
+			if ( attr.getNodeName().equalsIgnoreCase( attrName ) ) {
+				return attr.getNodeValue();
+			}	
+		}
+		
+		return "";
+	}
+	
+	/**
+	 * Helper function to work with XML data.
+	 * @param tagName
+	 * @param attrName
+	 * @param nodes
+	 * @return
+	 */
+	protected String getNodeAttr( String tagName, String attrName, NodeList nodes )
+	{
+		for ( int i = 0; i < nodes.getLength(); i++ ) {
+			Node node = nodes.item( i );
+			if ( node.getNodeName().equalsIgnoreCase( tagName ) ) {
+				NodeList childNodes = node.getChildNodes();
+				for ( int j = 0; j < childNodes.getLength(); j++ ) {
+					Node data = childNodes.item( j );
+					if ( data.getNodeType() == Node.ATTRIBUTE_NODE ) {
+						if ( data.getNodeName().equalsIgnoreCase( attrName ) ) {
+							return data.getNodeValue();
+						}
+					}
+				}
+			}
+		}
+		
+		return "";
 	}
 	
 }

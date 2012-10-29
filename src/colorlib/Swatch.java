@@ -29,7 +29,8 @@ package colorlib;
 
 import processing.core.*;
 
-public class Swatch {
+public class Swatch
+{
 
 	protected PApplet p;
 	private int c;

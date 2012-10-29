@@ -29,17 +29,31 @@ package colorlib.webservices;
 
 import java.util.ArrayList;
 
+import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import org.w3c.dom.*;
+
 import processing.core.*;
+
 import colorlib.Palette;
+import colorlib.webservices.WebService;
 
-public class Kuler extends WebService {
+public class Kuler extends WebService
+{
 
+	//TODO: http://www.vogella.com/articles/RSSFeed/article.html
+	//TODO: http://www.drdobbs.com/jvm/easy-dom-parsing-in-java/231002580
+	
 	protected PApplet p;
 	
 	private String key;
 	
 	private String KULER_API_URL = "http://kuler-api.adobe.com/rss/";
 	
+	/**
+	 * 
+	 * @param parent
+	 * @param _key
+	 */
 	public Kuler( final PApplet parent, String _key )
 	{
 		p = parent;
@@ -48,13 +62,24 @@ public class Kuler extends WebService {
 		p.println( "KEY: " + key );
 		
 	}
-
-	public KulerPalette[] getHighestRated() // should return KulerPalette[]
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public void getHighestRated() // should return KulerPalette[]
 	{
-		return makeKulerPalettes( "&listtype=rating", "get", null );
+	//	return makeKulerPalettes( "&listtype=rating", "get", null );
 	}
 	
-	private KulerPalette[] makeKulerPalettes( final String query, final String queryType, final String fileName ) // should return KulerPalette[]
+	/**
+	 * 
+	 * @param query
+	 * @param queryType
+	 * @param fileName
+	 * @return
+	 */
+	private void makeKulerPalettes( final String query, final String queryType, final String fileName ) // should return KulerPalette[]
 	{
 		
 		String url = new StringBuffer( KULER_API_URL ).append( queryType ).append( ".cfm?" )
@@ -62,11 +87,22 @@ public class Kuler extends WebService {
 		                                              .append( "&key=" + key )
 		                                              .toString();
 		
-		ArrayList<KulerPalette> palettes = new ArrayList<KulerPalette>();
+		p.println( url );
 		
-		XML xml = p.loadXML( url );
+		// ArrayList<KulerPalette> palettes = new ArrayList<KulerPalette>();
+		
+			
+		//NodeList root = getXML( url );
+		//Node channel = getNode( "channel", root );
+		
+		// System.out.println( channel.getNodeName() );
+			
+		// NodeList items = channel.getChildNodes("item");
+			
+		
+	//	XML xml = p.loadXML( url );
 		// p.println( xml );
-		
+		/*
 		if ( xml.getChild( "success" ) != null && xml.getChild("success").getContent().equals("false") ) {
 			
 			if ( DEBUG == true ) {
@@ -76,14 +112,14 @@ public class Kuler extends WebService {
 			
 		} else {
 			
-			XML[] themeItems = xml.getChildren( "channel/item/kuler:themeItem" );
+		//	XML[] themeItems = xml.getChildren( "channel/item/kuler:themeItem" );
 			
 			// p.println( themeItems );
 			
 			for ( int i = 0; i < themeItems.length; i++ ) {
 				
-				XML themeItem = themeItems[i];
-				XML[] themeSwatches = themeItem.getChildren( "kuler:themeSwatches/kuler:swatch/kuler:swatchHexColor" );
+			//	XML themeItem = themeItems[i];
+			//	XML[] themeSwatches = themeItem.getChildren( "kuler:themeSwatches/kuler:swatch/kuler:swatchHexColor" );
 				
 				int[] colors = new int[ themeSwatches.length ];
 				for ( int j = 0; j < themeSwatches.length; j++ ) {
@@ -98,9 +134,9 @@ public class Kuler extends WebService {
 				
 			}
 			
-		}
+		} */
 		
-		return (KulerPalette[]) palettes.toArray( new KulerPalette[ palettes.size() ] );
+		// return (KulerPalette[]) palettes.toArray( new KulerPalette[ palettes.size() ] );
 		
 		//XML xml = getXML( url, fileName );
 		

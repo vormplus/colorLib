@@ -30,7 +30,10 @@ package colorlib;
 import processing.core.*;
 import java.util.ArrayList;
 
-public class Palette {
+import colorlib.Swatch;
+
+public class Palette
+{
 
 	protected PApplet p;
 	protected ArrayList<Swatch> swatches;
@@ -45,7 +48,7 @@ public class Palette {
 		p = parent;
 		swatches = new ArrayList<Swatch>();
 		
-		p.println( "Standard Palette created" );
+		// p.println( "Standard Palette created" );
 	}
 	
 	/**
