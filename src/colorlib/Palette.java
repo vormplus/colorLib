@@ -139,7 +139,6 @@ s	 */
 
 	public void drawSwatches( final float w, final float h )
 	{
-
 		float swatchWidth = w / (float)swatches.size();
 		
 		int counter = 0;
@@ -153,6 +152,16 @@ s	 */
 			counter++;
 		}
 		
+	}
+	
+	public int getColor( int colorNumber )
+	{
+		return swatches.get( colorNumber ).getColor();
+	}
+	
+	public int numSwatches()
+	{
+		return swatches.size();
 	}
 	
 }
