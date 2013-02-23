@@ -47,8 +47,6 @@ public class Palette
 	{
 		p = parent;
 		swatches = new ArrayList<Swatch>();
-		
-		// p.println( "Standard Palette created" );
 	}
 	
 	/**
@@ -63,13 +61,6 @@ public class Palette
 		swatches = new ArrayList<Swatch>();
 		
 		addColors( colors );
-		
-		/*
-		for ( int i = 0; i < colors.length; i++ ) {
-			swatches.add( new Swatch( p, colors[i] ) );
-		} */
-
-		p.println( "Palette from colors array created" );
 	}
 	
 	/**
@@ -154,11 +145,20 @@ s	 */
 		
 	}
 	
+	/**
+	 * Returns the color for the index number
+	 * @param colorNumber number of the color you want to get
+	 * @return
+	 */
 	public int getColor( int colorNumber )
 	{
 		return swatches.get( colorNumber ).getColor();
 	}
 	
+	/**
+	 * Returns the number of swatches in the Palette
+	 * @return
+	 */
 	public int numSwatches()
 	{
 		return swatches.size();
