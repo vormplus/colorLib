@@ -7,6 +7,9 @@ import colorlib.Swatch;
 public class Tetrad extends Palette
 {
 
+	// TODO: Change this class name to Square? Tetrad is usually a rectangle.
+	// See http://www.tigercolor.com/color-lab/color-theory/color-theory-intro.htm
+	
 	public Tetrad( final PApplet parent)
 	{
 		super( parent );
