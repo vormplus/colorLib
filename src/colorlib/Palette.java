@@ -164,17 +164,4 @@ s	 */
 		return swatches.size();
 	}
 	
-	/**
-	 * Creates a 2 color Palette with the passed color and its complement on the RYB color wheel.
-	 * @param color
-	 */
-	public void makeComplement( final int color )
-	{
-		swatches.add( new Swatch( p, color ) );
-		Swatch secondColor = new Swatch( p, color );
-		secondColor.rotateRYB( 180 );
-		swatches.add( secondColor );
-	}
-	
-	
 }
