@@ -70,3 +70,7 @@ distribution/colorLib-1/reference/tools/package-tree.html
 distribution/colorLib-1/reference/tools/package-summary.html
 
 distribution/colorLib-1/reference/package-list
+
+*.html
+
+distribution/colorLib-1/reference/package-list
