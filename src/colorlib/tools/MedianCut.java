@@ -1,4 +1,4 @@
-package tools;
+package colorlib.tools;
 
 import java.util.Hashtable;
 
