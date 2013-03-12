@@ -29,6 +29,7 @@ package colorlib;
 
 import processing.core.*;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import colorlib.Swatch;
 
@@ -163,5 +164,103 @@ s	 */
 	{
 		return swatches.size();
 	}
+	
+	
+	
+	public void rotateRGB( final int angle )
+	{
+		for ( Swatch s : swatches ) {
+			s.rotateRGB( angle );			
+		}
+	}
+	
+	public void rotateRYB( final int angle )
+	{
+		for ( Swatch s : swatches ) {
+			s.rotateRYB( angle );
+			
+		}	
+	}
+	
+	
+	// --------------------------------------------------------------------
+	// Sort methods
+	
+	/**
+	 * Sorts the Swatches in the palette by hue
+	 */
+	public void sortByHue()
+	{
+		
+	}
+	
+	/**
+	 * Sorts the Swatches in the palette by saturation
+	 */
+	public void sortBySaturation()
+	{
+		
+	}
+	
+	/**
+	 * Sorts the Swatches in the palette by luminance
+	 */
+	public void sortByLuminance()
+	{
+		
+	}
+	
+	public void sortByProximity()
+	{
+		
+	}
+	
+	/**
+	 * Main sort function
+	 * @param ht
+	 */
+	private void sort( final Hashtable ht )
+	{
+			
+	}
+
+	// --------------------------------------------------------------------
+	// Search methods
+	
+	/**
+	 * Returns the darkest color (Swatch?) from the Palette
+	 */
+	public int getDarkest()
+	{
+		return 0;
+	}
+	
+	/**
+	 * Returns the lightest color (Swatch?) from the Palette
+	 */
+	public int getLightest()
+	{
+		return 0;
+	}
+	
+	/**
+	 * Returns the average of all colors (Swatch?) from the Palette
+	 */
+	public int getAverage()
+	{
+		return 0;		
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Deletes all duplicate colors in the Palette
+	 */
+	public void deleteDuplicate()
+	{
+		
+		
+	}
+	
 	
 }
