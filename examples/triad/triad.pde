@@ -12,7 +12,7 @@ void setup()
        
     color c = color( 255, 255, 0 );
     
-    p = new Triad( this, c, 20 );
+    p = new Triad( this, c, 80 );
 }
 
 void draw()

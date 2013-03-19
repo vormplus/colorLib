@@ -22,6 +22,7 @@ public class Triad extends Palette
 		super( parent );
 		
 		this.color = color;
+		this.angle = angle;
 		
 		makeTriad();
 	}
