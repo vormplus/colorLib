@@ -11,6 +11,8 @@
 *.zip
 *.zip
 
+distribution/*
+
 distribution/colorLib-1/reference/overview-tree.html
 
 distribution/colorLib-1/reference/overview-summary.html
