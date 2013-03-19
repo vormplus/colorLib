@@ -76,3 +76,7 @@ distribution/colorLib-1/reference/package-list
 distribution/colorLib-1/reference/package-list
 
 *.class
+
+lib/.DS_Store
+
+.DS_Store
