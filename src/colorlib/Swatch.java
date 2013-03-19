@@ -190,7 +190,6 @@ public class Swatch
 	private int setHSBColor( final float h, final float s, final float b )
 	{
 		return setHSBColor( h, s, b, 255 );
-		
 	}
 	
 	/**
@@ -236,15 +235,63 @@ public class Swatch
 		c = color;
 	}
 	
-	public void rotateRGB( final float angle )
+	public void rotateRGB( final float i_angle )
 	{
-		
-		
+		c = setHSBColor( ( p.hue( c ) + i_angle ) % 256, p.saturation( c ), p.brightness( c ) );
 	}
 	
-	public void rotateRYB( final float angle )
+	public void rotateRYB( float i_angle )
 	{
+		float hue = ((p.hue(c)) / 256f) * 360;
 		
+		i_angle %= 360;
+		float angle = 0;
+		
+		int[][] wheel = { { 0, 0 }, { 15, 8 }, { 30, 17 }, { 45, 26 },
+				{ 60, 34 }, { 75, 41 }, { 90, 48 }, { 105, 54 }, { 120, 60 },
+				{ 135, 81 }, { 150, 103 }, { 165, 123 }, { 180, 138 },
+				{ 195, 155 }, { 210, 171 }, { 225, 187 }, { 240, 204 },
+				{ 255, 219 }, { 270, 234 }, { 285, 251 }, { 300, 267 },
+				{ 315, 282 }, { 330, 298 }, { 345, 329 }, { 360, 0 } };
+
+		for ( int i = 0; i < wheel.length - 1; i++ ) {
+			int x0 = wheel[ i ][ 0 ];
+			int y0 = wheel[ i ][ 1 ];
+			int x1 = wheel[ i + 1 ][ 0 ];
+			int y1 = wheel[ i + 1 ][ 1 ];
+			
+			if ( y1 < y0 ) {
+				y1 += 360;
+			}
+			
+			if ( y0 <= hue && hue <= y1 ) {
+				angle = 1.0f * x0 + ( x1 - x0 ) * ( hue - y0 ) / ( y1 - y0 );
+				break;
+			}
+		}
+		
+		// System.out.println("hue: " + hue + "angle: " + angle);
+		angle = (angle + i_angle) % 360;
+
+		for ( int i = 0; i < wheel.length - 1; i++ ) {
+			int x0 = wheel[ i ][ 0 ];
+			int y0 = wheel[ i ][ 1 ];
+			int x1 = wheel[ i + 1 ][ 0 ];
+			int y1 = wheel[ i + 1 ][ 1 ];
+			
+			if ( y1 < y0 ) {
+				y1 += 360;
+			}
+			
+			if ( x0 <= angle && angle <= x1 ) {
+				hue = 1.0f * y0 + ( y1 - y0 ) * ( angle - x0 ) / ( x1 - x0 );
+				break;
+			}
+		}
+
+		hue %= 360;
+		
+		c = setHSBColor( hue * 256 / 360, p.saturation( c ), p.brightness( c ), p.alpha( c ) );
 		
 	}
 	
@@ -258,7 +305,6 @@ public class Swatch
 
 	public float brightnessDiff( final int color )
 	{
-		
 		return 0.0f;
 	}
 	
@@ -270,14 +316,12 @@ public class Swatch
 
 	public float colorDiff( final int color )
 	{
-		return 0.0f;
-		
+		return 0.0f;	
 	}
 
 	public float colorDiff( final Swatch swatch )
 	{
 		return colorDiff( swatch.getColor() );
-		
 	}
 
 }
