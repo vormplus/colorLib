@@ -14,6 +14,7 @@ public class Shaded extends Palette
 	public Shaded( final PApplet parent, final int color )
 	{
 		super( parent );
+		makeShaded( color );
 	}
 	
 	public void setColor( final int color )
@@ -26,6 +27,7 @@ public class Shaded extends Palette
 		for ( int i = 0; i < 6; i++ ) {
 			int c = p.lerpColor( color, p.color( 0 ), i * 0.2f );
 			Swatch swatch = new Swatch( p, c );
+			swatches.add( swatch );
 		}
 	}
 }

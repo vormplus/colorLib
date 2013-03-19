@@ -15,6 +15,7 @@ public class Tinted extends Palette
 	public Tinted( final PApplet parent, final int color )
 	{
 		super( parent );
+		makeTinted( color );
 	}
 	
 	public void setColor( final int color )
@@ -27,6 +28,7 @@ public class Tinted extends Palette
 		for ( int i = 0; i < 6; i++ ) {
 			int c = p.lerpColor( color, p.color( 255 ), i * 0.2f );
 			Swatch swatch = new Swatch( p, c );
+			swatches.add( swatch );
 		}
 	}
 }
