@@ -12,7 +12,7 @@ void setup()
        
     color c = color( 255, 255, 0 );
     
-    p = new Tetrad( this, c);
+    p = new Tetrad( this, c );
 }
 
 void draw()
