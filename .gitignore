@@ -74,3 +74,5 @@ distribution/colorLib-1/reference/package-list
 *.html
 
 distribution/colorLib-1/reference/package-list
+
+*.class
