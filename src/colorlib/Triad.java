@@ -20,12 +20,16 @@ public class Triad extends Palette
 	public Triad( final PApplet parent, final int color, final int angle )
 	{	
 		super( parent );
+		
+		this.color = color;
+		
+		makeTriad();
 	}
 
 	public void setColor( final int color )
 	{
 		
-		
+		this.color = color;
 	}
 
 	public void setAngle( final int angle )
