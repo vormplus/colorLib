@@ -44,9 +44,10 @@ public class Toned extends Palette
 		createPalette( color );
 	}
 	
-	public void setColor( final int color )
+	public Toned setColor( final int color )
 	{
 		createPalette( color );
+		return this;
 	}
 	
 	@Override

@@ -69,9 +69,10 @@ public class Palette
 	 * @param color a Processing color.
 	 */
 	
-	public void setColor( final int color )
+	public Palette setColor( final int color )
 	{
 		swatches.add( new Swatch( p, color ) );
+		return this;
 	}
 
 	/**
@@ -79,11 +80,13 @@ public class Palette
 	 * @param colors an array of Processing colors.
 	 */
 	
-	public void setColors( final int[] colors )
+	public Palette setColors( final int[] colors )
 	{
 		for ( int i = 0; i < colors.length; i++ ) {
 			swatches.add( new Swatch( p, colors[i] ) );
 		}
+		
+		return this;
 	}
 		
 	/* stub??? */

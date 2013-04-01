@@ -45,9 +45,10 @@ public class Tinted extends Palette
 		createPalette( color );
 	}
 	
-	public void setColor( final int color )
+	public Tinted setColor( final int color )
 	{
 		createPalette( color );
+		return this;
 	}
 	
 	@Override

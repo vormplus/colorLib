@@ -53,9 +53,10 @@ public class Triad extends Palette
 		createPalette();
 	}
 
-	public void setColor( final int color )
+	public Triad setColor( final int color )
 	{		
 		this.color = color;
+		return this;
 	}
 
 	public void setAngle( final int angle )

@@ -45,10 +45,10 @@ public class Complement extends Palette
 		createPalette( color );
 	}
 	
-	// TODO: make chainable...
-	public void setColor( final int color )
+	public Complement setColor( final int color )
 	{
 		createPalette( color );
+		return this;
 	}
 	
 	/**

@@ -29,22 +29,29 @@ package colorlib;
 
 import processing.core.*;
 
+/**
+ * Class to create a single Swatch.
+ * 
+ * @author ##author##
+ */
+
 public class Swatch
 {
-
-	protected PApplet p;
-	private int c;
+	/** Reference to PApplet */
+	protected PApplet 	p;
+	
+	/** Color */
+	private int 		c;
 	
 	/**
-	 * Creates an empty Swatch object.
+	 * Creates a Swatch object with the default color (Red)
 	 * @param parent reference to the main PApplet object.
 	 */
+	
 	public Swatch( final PApplet parent )
 	{
 		p = parent;
-		c = p.g.color( p.random( p.g.colorModeX ),
-				       p.random( p.g.colorModeY ),
-				       p.random( p.g.colorModeZ ) );
+		c = p.g.color( p.color( 255, 0, 0 ) );
 	}
 	
 	/**
@@ -52,11 +59,23 @@ public class Swatch
 	 * @param parent reference to the main PApplet object.
 	 * @param color	specified color.
 	 */
+	
 	public Swatch( final PApplet parent, final int color )
 	{
 		p = parent;
 		c = color;	
 	}
+	
+	/**
+	 * Sets the color of the Swatch. Be careful if your Swatch already has a color, this will overwrite it.
+	 * @param color
+	 */
+	
+	public void setColor( final int color )
+	{
+		c = color;
+	}
+
 	
 	/**
 	 * Returns the CMYK black value based on the formula ...
@@ -118,7 +137,6 @@ public class Swatch
 	 */
 	public void lighten()
 	{
-		
 		lighten( 10.0f );
 	}
 	
@@ -149,8 +167,7 @@ public class Swatch
 	 */
 	public void desaturate( final float amount )
 	{
-		saturate( -amount );
-		
+		saturate( -amount );	
 	}
 	
 	/**
@@ -159,7 +176,6 @@ public class Swatch
 	public void saturate()
 	{
 		saturate( 10.0f );
-		
 	}
 	
 	/**
@@ -202,7 +218,6 @@ public class Swatch
 		return c;
 	}
 	
-	
 	/**
 	 * Returns the transparent color of the Swatch
 	 * @param alpha Alpha value of the color. This should be a number between 0 and 100
@@ -227,18 +242,19 @@ public class Swatch
 	}
 	
 	/**
-	 * Sets the color of the swatch. Be careful if your swatch already has a color. This will overwrite it.
-	 * @param color
+	 * 
+	 * @param i_angle
 	 */
-	public void setColor( final int color )
-	{
-		c = color;
-	}
 	
 	public void rotateRGB( final float i_angle )
 	{
 		c = setHSBColor( ( p.hue( c ) + i_angle ) % 256, p.saturation( c ), p.brightness( c ) );
 	}
+	
+	/**
+	 * 
+	 * @param i_angle
+	 */
 	
 	public void rotateRYB( float i_angle )
 	{
@@ -295,14 +311,7 @@ public class Swatch
 		
 	}
 	
-	
-	public String getNearestHue()
-	{
-		
-		return "Hue...";
-	}
-	
-
+	// TODO: implement
 	public float brightnessDiff( final int color )
 	{
 		return 0.0f;
@@ -311,9 +320,9 @@ public class Swatch
 	public float brightnessDiff( final Swatch swatch )
 	{
 		return brightnessDiff( swatch.getColor() );
-		
 	}
 
+	// TODO: implement
 	public float colorDiff( final int color )
 	{
 		return 0.0f;	

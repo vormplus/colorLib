@@ -46,10 +46,10 @@ public class Analogous extends Palette
 		createPalette( color );
 	}
 	
-	// TODO: Make chainable
-	public void setColor( final int color )
+	public Analogous setColor( final int color )
 	{
 		createPalette( color );
+		return this;
 	}
 	
 	// TODO: check if algorithm is ok

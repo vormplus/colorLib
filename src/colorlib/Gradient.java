@@ -60,19 +60,22 @@ public class Gradient extends Palette
 	}
 	
 	@Override
-	public void setColors( final int[] colors )
+	public Gradient setColors( final int[] colors )
 	{
 		this.colors = colors;
+		return this;
 	}
 	
-	public void setSteps( int steps )
+	public Gradient setSteps( int steps )
 	{
 		this.steps = steps;
+		return this;
 	}
 	
-	public void setWrap( boolean wrap )
+	public Gradient setWrap( boolean wrap )
 	{
 		this.wrap = wrap;
+		return this;
 	}
 	
 	/**

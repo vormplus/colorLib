@@ -48,11 +48,10 @@ public class Tetrad extends Palette
 		createPalette( color );
 	}
 	
-	// TODO: Make chainable
-	public void setColor( final int color )
+	public Tetrad setColor( final int color )
 	{
 		createPalette( color );
-		
+		return this;
 	}
 	
 	@Override

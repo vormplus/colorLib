@@ -45,10 +45,10 @@ public class SplitComplementary extends Palette
 		createPalette( color );
 	}
 	
-	// TODO: Make chainable
-	public void setColor( final int color )
+	public SplitComplementary setColor( final int color )
 	{
 		createPalette( color );
+		return this;
 	}
 	
 	// TODO: check if algorithm is ok

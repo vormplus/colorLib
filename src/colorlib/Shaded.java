@@ -44,9 +44,10 @@ public class Shaded extends Palette
 		createPalette( color );
 	}
 	
-	public void setColor( final int color )
+	public Shaded setColor( final int color )
 	{
 		createPalette( color );
+		return this;
 	}
 	
 	@Override
