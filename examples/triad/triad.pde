@@ -2,7 +2,7 @@ import colorlib.webservices.*;
 import colorlib.tools.*;
 import colorlib.*;
 
-Triad p;
+Triad p1, p2;
 
 void setup()
 {
@@ -12,15 +12,16 @@ void setup()
        
     color c = color( 255, 255, 0 );
     
-    p = new Triad( this, c, 80 );
+    p1 = new Triad( this, c, 80 );
+    p2 = new Triad( this ).setColor( color( 0, 0, 255 ) ).setAngle( 40 );
 }
 
 void draw()
 {
     background( 0 );
     translate( 10, 10 );
-    p.drawSwatches();
+    p1.drawSwatches();
     
     translate( 0, 50 );
-    p.drawSwatches( 180, 60 );
+    p2.drawSwatches( 180, 60 );
 }
