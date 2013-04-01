@@ -41,6 +41,11 @@ public class Triad extends Palette
 	public Triad( final PApplet parent )
 	{
 		super( parent );
+		
+		this.angle = 80;
+		this.color = p.color( 255, 0, 0 );
+		
+		createPalette();
 	}
 	
 	public Triad( final PApplet parent, final int color, final int angle )
@@ -56,17 +61,26 @@ public class Triad extends Palette
 	public Triad setColor( final int color )
 	{		
 		this.color = color;
+		
+		createPalette();
+		
 		return this;
 	}
 
-	public void setAngle( final int angle )
+	public Triad setAngle( final int angle )
 	{
-		this.angle = angle;		
+		this.angle = angle;
+		
+		createPalette();
+		
+		return this;
 	}
 
 	@Override
 	public void createPalette()
 	{
+		swatches.clear();
+		
 		angle = PApplet.constrain( angle, 0, 180 );
 		
 		swatches.add( new Swatch( p, color ) );
