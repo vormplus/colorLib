@@ -137,7 +137,7 @@ public class ColourLovers extends WebService
 								
 								int colorValue = PApplet.unhex( "FF" + colorHex );
 								
-								palette.addColor( colorValue );
+								palette.setColor( colorValue );
 							}
 						}
 						

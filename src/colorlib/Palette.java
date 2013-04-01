@@ -61,26 +61,7 @@ public class Palette
 		p = parent;
 		swatches = new ArrayList<Swatch>();
 		
-		addColors( colors );
-	}
-	
-	/**
-	 * Creates a Palette object based on an image. Duplicate colors are removed.
-	 * @param parent reference to the main PApplet object.
-	 * @param img a Processing image.
-	 */
-	
-	public Palette( final PApplet parent, final PImage img )
-	{
-		p = parent;
-		
-		swatches = new ArrayList<Swatch>();
-		
-		for ( int i = 0; i < img.pixels.length; i++ ) {
-			swatches.add( new Swatch( p, img.pixels[i] ) );
-		}
-		
-		removeDuplicateSwatches();
+		setColors( colors );
 	}
 	
 	/**
@@ -88,7 +69,7 @@ public class Palette
 	 * @param color a Processing color.
 	 */
 	
-	public void addColor( final int color )
+	public void setColor( final int color )
 	{
 		swatches.add( new Swatch( p, color ) );
 	}
@@ -98,13 +79,24 @@ public class Palette
 	 * @param colors an array of Processing colors.
 	 */
 	
-	public void addColors( final int[] colors )
+	public void setColors( final int[] colors )
 	{
 		for ( int i = 0; i < colors.length; i++ ) {
 			swatches.add( new Swatch( p, colors[i] ) );
 		}
 	}
-	
+		
+	/* stub??? */
+	public void createPalette()
+	{
+		
+	}
+
+	public void createPalette( final int color )
+	{
+		
+	}
+
 	/**
 	 * Removes duplicate colors from the Palette
 s	 */

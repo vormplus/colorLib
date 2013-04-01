@@ -33,6 +33,11 @@ import colorlib.Swatch;
 
 public class Gradient extends Palette
 {
+	
+	int     steps;
+	boolean wrap;
+	int[]   colors;
+	
 	/**
 	 * 
 	 * @param parent
@@ -48,10 +53,26 @@ public class Gradient extends Palette
 	 * @param _p
 	 * @param step
 	 */
+	
 	public Gradient( final PApplet parent, Palette _p, int step )
 	{
-		super( parent );
-		
+		super( parent );	
+	}
+	
+	@Override
+	public void setColors( final int[] colors )
+	{
+		this.colors = colors;
+	}
+	
+	public void setSteps( int steps )
+	{
+		this.steps = steps;
+	}
+	
+	public void setWrap( boolean wrap )
+	{
+		this.wrap = wrap;
 	}
 	
 	/**
@@ -60,11 +81,12 @@ public class Gradient extends Palette
 	 * @param stepSize
 	 * @param wrap
 	 */
-	private void createGradient( int[] colors, int stepSize, boolean wrap )
+	
+	@Override
+	public void createPalette()
 	{
-		for ( int i = 0; i < stepSize; i++ ) {
-			
-			Swatch s = new Swatch( p, (int)colorsBetween( colors, (float) i / stepSize, wrap ) );		
+		for ( int i = 0; i < steps; i++ ) {		
+			Swatch s = new Swatch( p, colorsBetween( colors, (float) i / steps, wrap ) );		
 			swatches.add( s );
 		}
 	}
