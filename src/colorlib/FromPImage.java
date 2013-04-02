@@ -27,8 +27,6 @@
 
 package colorlib;
 
-import java.util.ArrayList;
-
 import processing.core.*;
 import colorlib.Palette;
 import colorlib.Swatch;
