@@ -41,7 +41,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.stream.*;
 
-
 import processing.core.*;
 
 abstract class WebService
@@ -53,12 +52,14 @@ abstract class WebService
 	
 	protected URL url = null;
 	
+	// TODO: Rewrite webservice class to work with JSON.
+	
 	protected WebService()
 	{
 		
 	}
 	
-	protected NodeList getXML( String feedURL ) //, String fileName )
+	protected NodeList getXML( String feedURL )
 	{
 		try {
 			url = new URL( feedURL );
@@ -106,7 +107,6 @@ abstract class WebService
 	 */
 	protected void printXML( String url )
 	{
-		//TODO: rewrite this ...
 		p.println( "printXML()" );
 		p.println( "---------------------------------" );
 		

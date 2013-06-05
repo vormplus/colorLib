@@ -43,6 +43,8 @@ public class ColourLovers extends WebService
 	
 	private String COLOURLOVERS_API_URL = "http://www.colourlovers.com/api/palettes";
 	
+	// TODO: rewrite class to work with Colourlovers JSON api
+	
 	/**
 	 * 
 	 * @param parent
@@ -60,7 +62,7 @@ public class ColourLovers extends WebService
 	
 	public ArrayList<Palette> getNew()
 	{
-		return makePalettes( "/new" );
+		return makePalettes( "/new?format=json" );
 	}
 	
 	/**
@@ -70,7 +72,7 @@ public class ColourLovers extends WebService
 
 	public ArrayList<Palette> getTop()
 	{ 
-		return makePalettes( "/top" );
+		return makePalettes( "/top?format=json" );
 	}
 
 	/**
@@ -80,7 +82,7 @@ public class ColourLovers extends WebService
 
 	public ArrayList<Palette> getRandom()
 	{ 
-		return makePalettes( "/random" );
+		return makePalettes( "/random?format=json" );
 	}
 
 	/**
@@ -91,7 +93,7 @@ public class ColourLovers extends WebService
 	
 	public ArrayList<Palette> search( String keyWord )
 	{
-		return makePalettes( "?keywords=" + keyWord );	
+		return makePalettes( "?keywords=" + keyWord + "&format=json" );	
 	}
 	
 	/**
@@ -110,7 +112,7 @@ public class ColourLovers extends WebService
 		
 		ArrayList<Palette> out = new ArrayList<Palette>();
 		
-		NodeList root = getXML( feedURL );		
+/*		NodeList root = getXML( feedURL );		
 		NodeList palettesList = root.item( 0 ).getChildNodes();
 
 		for ( int i = 0; i < palettesList.getLength(); i++ ) {
@@ -145,7 +147,7 @@ public class ColourLovers extends WebService
 					}
 				}
 			}
-		}
+		} */
 		
 		return out;
 	}

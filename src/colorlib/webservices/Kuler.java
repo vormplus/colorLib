@@ -40,8 +40,8 @@ import colorlib.webservices.WebService;
 public class Kuler extends WebService
 {
 
-	//TODO: http://www.vogella.com/articles/RSSFeed/article.html
-	//TODO: http://www.drdobbs.com/jvm/easy-dom-parsing-in-java/231002580
+	// TODO: Rewrite Kuler class to work with the new Kuler API
+	// Hopefully they will have a JSON api available.
 	
 	protected PApplet p;
 	
@@ -59,7 +59,9 @@ public class Kuler extends WebService
 		p = parent;
 		key = _key;
 		
-		p.println( "KEY: " + key );
+		// p.println( "KEY: " + key );
+		
+		p.println("Kuler is support not implemented yet.");
 		
 	}
 	
@@ -89,62 +91,6 @@ public class Kuler extends WebService
 		
 		p.println( url );
 		
-		// ArrayList<KulerPalette> palettes = new ArrayList<KulerPalette>();
-		
-			
-		//NodeList root = getXML( url );
-		//Node channel = getNode( "channel", root );
-		
-		// System.out.println( channel.getNodeName() );
-			
-		// NodeList items = channel.getChildNodes("item");
-			
-		
-	//	XML xml = p.loadXML( url );
-		// p.println( xml );
-		/*
-		if ( xml.getChild( "success" ) != null && xml.getChild("success").getContent().equals("false") ) {
-			
-			if ( DEBUG == true ) {
-				p.println( "The following error occurred while calling the Kuler API: " );
-				p.println( xml.getChild("error/errorText").getContent() );
-			}
-			
-		} else {
-			
-		//	XML[] themeItems = xml.getChildren( "channel/item/kuler:themeItem" );
-			
-			// p.println( themeItems );
-			
-			for ( int i = 0; i < themeItems.length; i++ ) {
-				
-			//	XML themeItem = themeItems[i];
-			//	XML[] themeSwatches = themeItem.getChildren( "kuler:themeSwatches/kuler:swatch/kuler:swatchHexColor" );
-				
-				int[] colors = new int[ themeSwatches.length ];
-				for ( int j = 0; j < themeSwatches.length; j++ ) {
-					colors[j] = PApplet.unhex( "FF" + themeSwatches[j].getContent() );
-				}
-				
-				KulerPalette kp = new KulerPalette( p, colors );
-				
-				// add author, id, tags, ... here ???
-				
-				palettes.add( kp );
-				
-			}
-			
-		} */
-		
-		// return (KulerPalette[]) palettes.toArray( new KulerPalette[ palettes.size() ] );
-		
-		//XML xml = getXML( url, fileName );
-		
-		
-/*		if ( DEBUG == true ) {	
-			p.println( "URL: " + url );
-		} */
-		
-		// return (KulerPalette[]) palettes.toArray();
+
 	}
 }
