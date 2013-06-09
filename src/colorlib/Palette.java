@@ -92,12 +92,12 @@ public class Palette
 	/* stub??? */
 	public void createPalette()
 	{
-		
+		notImplemented();
 	}
 
 	public void createPalette( final int color )
 	{
-		
+		notImplemented();
 	}
 
 	/**
@@ -106,7 +106,7 @@ s	 */
 	
 	public void removeDuplicateSwatches()
 	{
-		
+		notImplemented();
 	}
 	
 	/**
@@ -186,7 +186,7 @@ s	 */
 	 */
 	public void sortByHue()
 	{
-		
+		notImplemented();
 	}
 	
 	/**
@@ -194,7 +194,7 @@ s	 */
 	 */
 	public void sortBySaturation()
 	{
-		
+		notImplemented();
 	}
 	
 	/**
@@ -202,12 +202,12 @@ s	 */
 	 */
 	public void sortByLuminance()
 	{
-		
+		notImplemented();
 	}
 	
 	public void sortByProximity()
 	{
-		
+		notImplemented();
 	}
 	
 	/**
@@ -216,7 +216,7 @@ s	 */
 	 */
 	private void sort( final Hashtable ht )
 	{
-			
+		notImplemented();	
 	}
 
 	// --------------------------------------------------------------------
@@ -227,6 +227,7 @@ s	 */
 	 */
 	public int getDarkest()
 	{
+		notImplemented();
 		return 0;
 	}
 	
@@ -235,6 +236,7 @@ s	 */
 	 */
 	public int getLightest()
 	{
+		notImplemented();
 		return 0;
 	}
 	
@@ -243,6 +245,7 @@ s	 */
 	 */
 	public int getAverage()
 	{
+		notImplemented();
 		return 0;		
 	}
 	
@@ -253,8 +256,20 @@ s	 */
 	 */
 	public void deleteDuplicate()
 	{
-		
-		
+		notImplemented();
+	}
+	
+	// TODO: remove the notImplemented method when colorLib 2 is finished.
+	
+	/**
+	 * Private method used to print "method not implemented yet to the Processing console.
+	 * @return
+	 */
+	
+	private void notImplemented()
+	{
+		String name = Thread.currentThread().getStackTrace()[2].getMethodName();		
+		p.println( name + ": Method not implemented yet." );
 	}
 	
 	
