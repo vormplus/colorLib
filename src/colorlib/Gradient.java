@@ -44,7 +44,8 @@ public class Gradient extends Palette
 	 */
 	public Gradient( final PApplet parent )
 	{
-		super( parent ); // call Palette()
+		super( parent ); // call Palette()		
+		createPalette();
 	}
 
 	/**
@@ -56,25 +57,32 @@ public class Gradient extends Palette
 	
 	public Gradient( final PApplet parent, Palette _p, int step )
 	{
-		super( parent );	
+		super( parent );
+		
+		this.wrap = false;
+		
+		createPalette();
 	}
 	
 	@Override
 	public Gradient setColors( final int[] colors )
 	{
 		this.colors = colors;
+		createPalette();
 		return this;
 	}
 	
 	public Gradient setSteps( int steps )
 	{
 		this.steps = steps;
+		createPalette();
 		return this;
 	}
 	
 	public Gradient setWrap( boolean wrap )
 	{
 		this.wrap = wrap;
+		createPalette();
 		return this;
 	}
 	
@@ -130,6 +138,7 @@ public class Gradient extends Palette
 	 * @param wrap
 	 * @return
 	 */
+	
 	private int colorsBetween( final int[] colors, final float step, boolean wrap )
 	{
 		int length = colors.length - 1;
@@ -139,7 +148,7 @@ public class Gradient extends Palette
 		}
 		
 		if ( step <= 0 ) {
-			return colors[0];
+			return colors[ 0 ];
 		}
 		
 		if ( step >= 1 ) {
