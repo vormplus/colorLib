@@ -35,12 +35,6 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.w3c.dom.*;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.stream.*;
-
 import processing.core.*;
 
 abstract class WebService
@@ -48,178 +42,20 @@ abstract class WebService
 
 	protected PApplet p;
 	
-	protected boolean DEBUG = true;
+	protected boolean DEBUG = false;
 	
 	protected URL url = null;
 	
-	// TODO: Rewrite webservice class to work with JSON.
-	
 	protected WebService()
 	{
-		
-	}
-	
-	protected NodeList getXML( String feedURL )
-	{
-		try {
-			url = new URL( feedURL );
-		} catch ( MalformedURLException e ) {
-			throw new RuntimeException( e );
-		}
-		
-		InputStream feed = getFeed();		
-		NodeList root = null;
-		
-		try {
-			
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse( feed );
-			
-			root = doc.getChildNodes();
-			
-		} catch( Exception e ) {
-			e.printStackTrace();
-		}
-		
-		return root;
-		
 	}
 	
 	/**
-	 * Helper function to work get the XML data.
-	 * @param tagName
-	 * @param nodes
-	 * @return
+	 * Debug Mode is disabled by default. This method can be used to enable Debug Mode, and print useful data such as the API url to the console.
+	 * @param debug
 	 */
-	private InputStream getFeed()
+	public void setDebug( boolean debug )
 	{
-		try {
-			return url.openStream();
-		} catch ( IOException e ) {
-			throw new RuntimeException( e );
-		}
+		this.DEBUG = debug;
 	}
-
-	/**
-	 * Print XML file to console
-	 * @param url
-	 */
-	protected void printXML( String url )
-	{
-		p.println( "printXML()" );
-		p.println( "---------------------------------" );
-		
-		String lines[] = p.loadStrings( url );
-		for ( int i = 0; i < lines.length; i++ ) {
-			p.println( lines[i] );
-		}
-	}
-	
-	/**
-	 * Helper function to work with XML data.
-	 * @param tagName
-	 * @param nodes
-	 * @return
-	 */
-	protected Node getNode( String tagName, NodeList nodes )
-	{
-		for ( int i = 0; i < nodes.getLength(); i++ ) {
-			Node node = nodes.item( i );
-			if ( node.getNodeName().equalsIgnoreCase( tagName ) ) {
-				return node;
-			}
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Helper function to work with XML data.
-	 * @param node
-	 * @return
-	 */
-	protected String getNodeValue( Node node )
-	{
-		NodeList childNodes = node.getChildNodes();
-		for ( int i = 0; i < childNodes.getLength(); i++ ) {
-			Node data = childNodes.item( i );
-			if ( data.getNodeType() == Node.TEXT_NODE ) {
-				return data.getNodeValue();
-			}
-		}
-		
-		return "";
-	}
-
-	/**
-	 * Helper function to work with XML data.
-	 * @param tagName
-	 * @param nodes
-	 * @return
-	 */
-	protected String getNodeValue( String tagName, NodeList nodes )
-	{
-		for ( int i = 0; i < nodes.getLength(); i++ ) {
-			Node node = nodes.item( i );
-			if ( node.getNodeName().equalsIgnoreCase( tagName ) ) {
-				NodeList childNodes = node.getChildNodes();
-				for ( int j = 0; j < childNodes.getLength(); j++ ) {
-					Node data = childNodes.item( j );
-					if ( data.getNodeType() == Node.TEXT_NODE ) {
-						return data.getNodeValue();
-					}
-				}
-			}
-		}
-		
-		return "";
-	}
-	
-	/**
-	 * Helper function to work with XML data.
-	 * @param attrName
-	 * @param node
-	 * @return
-	 */
-	protected String getNodeAttr( String attrName, Node node )
-	{
-		NamedNodeMap attrs = node.getAttributes();
-		for ( int i = 0; i < attrs.getLength(); i++ ) {
-			Node attr = attrs.item( i );
-			if ( attr.getNodeName().equalsIgnoreCase( attrName ) ) {
-				return attr.getNodeValue();
-			}	
-		}
-		
-		return "";
-	}
-	
-	/**
-	 * Helper function to work with XML data.
-	 * @param tagName
-	 * @param attrName
-	 * @param nodes
-	 * @return
-	 */
-	protected String getNodeAttr( String tagName, String attrName, NodeList nodes )
-	{
-		for ( int i = 0; i < nodes.getLength(); i++ ) {
-			Node node = nodes.item( i );
-			if ( node.getNodeName().equalsIgnoreCase( tagName ) ) {
-				NodeList childNodes = node.getChildNodes();
-				for ( int j = 0; j < childNodes.getLength(); j++ ) {
-					Node data = childNodes.item( j );
-					if ( data.getNodeType() == Node.ATTRIBUTE_NODE ) {
-						if ( data.getNodeName().equalsIgnoreCase( attrName ) ) {
-							return data.getNodeValue();
-						}
-					}
-				}
-			}
-		}
-		
-		return "";
-	}
-	
 }

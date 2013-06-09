@@ -27,11 +27,10 @@
 
 package colorlib.webservices;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import java.util.ArrayList;
 
 import processing.core.*;
+import processing.data.*;
 
 import colorlib.Palette;
 import colorlib.webservices.WebService;
@@ -39,20 +38,19 @@ import colorlib.webservices.WebService;
 public class ColourLovers extends WebService
 {
 
-//	protected PApplet p;
+	protected PApplet p;
 	
 	private String COLOURLOVERS_API_URL = "http://www.colourlovers.com/api/palettes";
 	
-	// TODO: rewrite class to work with Colourlovers JSON api
+	private JSONArray jsonFeed;
 	
 	/**
-	 * 
+	 * Constructor, Main ColourLovers object. This one is needed to search ColourLovers for palettes.
 	 * @param parent
 	 */
 	public ColourLovers( final PApplet parent )
 	{
-		p = parent;
-		
+		p = parent;		
 	}
 	
 	/**
@@ -112,42 +110,23 @@ public class ColourLovers extends WebService
 		
 		ArrayList<Palette> out = new ArrayList<Palette>();
 		
-/*		NodeList root = getXML( feedURL );		
-		NodeList palettesList = root.item( 0 ).getChildNodes();
-
-		for ( int i = 0; i < palettesList.getLength(); i++ ) {
+		jsonFeed = new JSONArray( p.createReader( feedURL ) );
+	
+		for ( int i = 0; i < jsonFeed.size(); i++ ) {
 			
-			if ( palettesList.item( i ).getChildNodes().getLength() != 0 ) {
-
-				NodeList paletteList = palettesList.item( i ).getChildNodes();
-				
-				for ( int j = 0; j < paletteList.getLength(); j++ ) {
-					
-					Node node = paletteList.item( j );
-					if ( node.getNodeName().equalsIgnoreCase( "colors" ) ) {
-						
-						Palette palette = new Palette( p ); 
-						
-						NodeList colors = node.getChildNodes();
-						
-						for ( int k = 0; k < colors.getLength(); k++ ) {
-							
-							Node colorNode = colors.item( k );
-							if ( colorNode.getNodeName().equalsIgnoreCase( "hex" ) ) {
-								
-								String colorHex = getNodeValue( colorNode );
-								
-								int colorValue = PApplet.unhex( "FF" + colorHex );
-								
-								palette.setColor( colorValue );
-							}
-						}
-						
-						out.add( palette );
-					}
-				}
+			JSONObject paletteObject = jsonFeed.getJSONObject( i );
+			JSONArray colorsArray = paletteObject.getJSONArray( "colors" );
+			
+			Palette palette = new Palette( p );
+			
+			for ( int j = 0; j < colorsArray.size(); j++ ) {
+				int c = PApplet.unhex( "FF" + colorsArray.getString( j ) );
+				palette.setColor( c );
 			}
-		} */
+			
+			out.add( palette );
+			
+		}
 		
 		return out;
 	}
