@@ -13,7 +13,7 @@ void setup()
     color c = color( 255, 255, 0 );
     
     p1 = new Analogous( this, c );
-    p2 = new Analogous( this ).setColor( color( 255, 0, 0 ) );
+    p2 = new Analogous( this ).setColor( color( 225, 128, 0 ) );
 }
 
 void draw()
