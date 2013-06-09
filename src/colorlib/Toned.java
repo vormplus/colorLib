@@ -33,6 +33,11 @@ import colorlib.Swatch;
 
 public class Toned extends Palette
 {
+	/**
+	 * Creates a Tinted color palette with 6 colors, based on a given color. Mixes the original color with Grey.
+	 * @param parent
+	 */
+
 	public Toned( final PApplet parent )
 	{
 		super( parent );

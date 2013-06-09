@@ -34,6 +34,11 @@ import colorlib.Swatch;
 public class Tinted extends Palette
 {
 
+	/**
+	 * Creates a Tinted color palette with 6 colors, based on a given color. Mixes the original color with White.
+	 * @param parent
+	 */
+	
 	public Tinted( final PApplet parent )
 	{
 		super( parent );

@@ -33,6 +33,11 @@ import colorlib.Swatch;
 
 public class Shaded extends Palette
 {
+	/**
+	 * Creates a Shaded color palette with 6 colors, based on a given color. Mixes the original color with Black.
+	 * @param parent
+	 */
+	
 	public Shaded( final PApplet parent )
 	{
 		super( parent );
