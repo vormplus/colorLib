@@ -36,7 +36,7 @@ public class FromPImage extends Palette
 	PImage img;
 
 	/**
-	 * Creates a Palette object based on an image. Duplicate colors are removed.
+	 * Creates a Palette object from on a PImage. Duplicate colors are removed.
 	 * @param parent Reference to the main PApplet object.
 	 * @param img a Processing image.
 	 */
@@ -46,22 +46,26 @@ public class FromPImage extends Palette
 		super( parent );
 		
 		this.img = img;
+		
+		createPalette();
 	}
 
-	public FromPImage( final PApplet parent, final int color )
+/*	public FromPImage( final PApplet parent, final int color )
 	{
 		super( parent );
 		createPalette( color );
-	}
+	} */
 	
 	@Override
-	public void createPalette( final int color )
+	public void createPalette()
 	{
+		p.println( "Number of Pixels: " + img.pixels.length );
+		
 		for ( int i = 0; i < img.pixels.length; i++ ) {
 			swatches.add( new Swatch( p, img.pixels[i] ) );
 		}
 		
-		removeDuplicateSwatches();	
+		// removeDuplicateSwatches();	
 		
 	}
 }
