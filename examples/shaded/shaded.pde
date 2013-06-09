@@ -18,7 +18,7 @@ void setup()
 
 void draw()
 {
-    background( 0 );
+    background( 255 );
     translate( 10, 10 );
     p1.drawSwatches();
     
