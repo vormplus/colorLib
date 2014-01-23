@@ -39,7 +39,7 @@ public class MedianCut
 
 	private Hashtable histogram;
 	
-	private Cube[] cubes;
+//	private Cube[] cubes;
 	
 	protected PApplet p;
 	
@@ -50,7 +50,7 @@ public class MedianCut
 		p = parent;
 	}
 	
-	
+/*	
 	public int[] calc( int[] colors, int cnt )
 	{
 		histogram = new Hashtable();
@@ -72,14 +72,14 @@ public class MedianCut
 		return x;
 		
 	}
-	
+*/	
 	
 	/**
 	 * Cube Class
 	 * @author janvantomme
 	 *
 	 */
-	
+/*	
 	private class Cube
 	{
 		int level;
@@ -199,6 +199,6 @@ public class MedianCut
 			
 		}
 		
-	}
+	} */
 	
 }
