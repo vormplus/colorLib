@@ -12,7 +12,7 @@ void setup()
     noStroke();
     
     s1 = new Swatch( this );
-    s2 = new Swatch( this, color( 255, 0, 0 ) );
+    s2 = new Swatch( this, color( 255, 125, 0 ) );
 }
 
 void draw()
