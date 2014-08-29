@@ -2,7 +2,7 @@
 
 colorLib is a library for Processing that allows you to work with colors.
 
-Compiled and tested on Mac OS X 10.7.5 with Processing 2.0. The API of colorLib has changed a lot and is NOT compatible with colorLib 1.x.
+Compiled and tested on Mac OS X 10.9.4 with Processing 2.2.1. The API of colorLib has changed a lot and is NOT compatible with colorLib 1.x.
 
 Not everything is implemented yet. These are the things that have been tested and should work properly.
 
