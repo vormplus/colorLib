@@ -61,7 +61,7 @@ public class Palette
 		p = parent;
 		swatches = new ArrayList<Swatch>();
 		
-		setColors( colors );
+		addColors( colors );
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public class Palette
 	 * @param color a Processing color.
 	 */
 	
-	public Palette setColor( final int color )
+	public Palette addColor( final int color )
 	{
 		swatches.add( new Swatch( p, color ) );
 		return this;
@@ -80,7 +80,7 @@ public class Palette
 	 * @param colors an array of Processing colors.
 	 */
 	
-	public Palette setColors( final int[] colors )
+	public Palette addColors( final int[] colors )
 	{
 		for ( int i = 0; i < colors.length; i++ ) {
 			swatches.add( new Swatch( p, colors[i] ) );
@@ -126,19 +126,25 @@ s	 */
 
 	public void drawSwatches( final float w, final float h )
 	{
-		float swatchWidth = w / (float)swatches.size();
+		if ( swatches.size() > 0 ) {
+
+			float swatchWidth = w / (float)swatches.size();
 		
-		int counter = 0;
+			int counter = 0;
 		
-		for ( Swatch s : swatches ) {
+			for ( Swatch s : swatches ) {
 			
-			p.fill( s.getColor() );
+				p.fill( s.getColor() );
+				p.noStroke();
+				p.rect( swatchWidth * counter, 0, swatchWidth, h );
+			
+				counter++;
+			}
+		} else if ( swatches.size() == 0 ) {
+			p.fill( p.color( 255, 255, 255 ) );
 			p.noStroke();
-			p.rect( swatchWidth * counter, 0, swatchWidth, h );
-			
-			counter++;
+			p.rect( 0, 0, w, h );
 		}
-		
 	}
 	
 	/**

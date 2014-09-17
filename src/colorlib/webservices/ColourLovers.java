@@ -121,7 +121,7 @@ public class ColourLovers extends WebService
 			
 			for ( int j = 0; j < colorsArray.size(); j++ ) {
 				int c = PApplet.unhex( "FF" + colorsArray.getString( j ) );
-				palette.setColor( c );
+				palette.addColor( c );
 			}
 			
 			out.add( palette );

@@ -65,7 +65,7 @@ public class Gradient extends Palette
 	}
 	
 	@Override
-	public Gradient setColors( final int[] colors )
+	public Gradient addColors( final int[] colors )
 	{
 		this.colors = colors;
 		createPalette();
