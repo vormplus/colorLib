@@ -34,27 +34,38 @@ import colorlib.Swatch;
 public class Complement extends Palette
 {
 
+	/**
+	 * Creates a 2 color Palette with the passed color and its complement on the RYB color wheel.
+	 * @param color
+	 */
+
 	public Complement( final PApplet parent )
 	{
 		super( parent );
-	}
-	
-	public Complement( final PApplet parent, int color )
-	{
-		super( parent );
-		createPalette( color );
-	}
-	
-	public Complement setColor( final int color )
-	{
-		createPalette( color );
-		return this;
 	}
 	
 	/**
 	 * Creates a 2 color Palette with the passed color and its complement on the RYB color wheel.
 	 * @param color
 	 */
+
+	public Complement( final PApplet parent, int color )
+	{
+		super( parent );
+		createPalette( color );
+	}
+	
+	/**
+	 * Sets the color for the palette. This color will be used to generate the other.
+	 * @param color
+	 * @return
+	 */
+	
+	public Complement setColor( final int color )
+	{
+		createPalette( color );
+		return this;
+	}
 	
 	@Override
 	public void createPalette( final int color )

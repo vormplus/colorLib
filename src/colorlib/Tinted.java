@@ -56,7 +56,7 @@ public class Tinted extends Palette
 	}
 	
 	/**
-	 * Sets the color for the palette. This color will be used to create the other colors.
+	 * Sets the color for the palette. This color will be used to generate the other colors.
 	 * @param color
 	 * @return
 	 */

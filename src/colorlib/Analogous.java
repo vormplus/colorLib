@@ -34,17 +34,32 @@ import colorlib.Swatch;
 public class Analogous extends Palette
 {
 	
+	/**
+	 * Creates an Analogous color palette with 3 colors, based on a given color.
+	 * @param parent
+	 */
 	
 	public Analogous( final PApplet parent)
 	{
 		super( parent );
 	}
 
+	/**
+	 * Creates an Analogous color palette with 3 colors, based on a given color.
+	 * @param parent
+	 */
+
 	public Analogous( final PApplet parent, final int color )
 	{
 		super( parent );
 		createPalette( color );
 	}
+	
+	/**
+	 * Sets the color for the palette. This color will be used to generate the other colors.
+	 * @param color
+	 * @return
+	 */
 	
 	public Analogous setColor( final int color )
 	{
