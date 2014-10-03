@@ -109,6 +109,7 @@ public class Gradient extends Palette
 	 * @param step
 	 * @return
 	 */
+	
 	private int colorBetween( final int startColor, final int endColor, final float step )
 	{
 		int startAlpha = startColor >> 24 & 0xFF;

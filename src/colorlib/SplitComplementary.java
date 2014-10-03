@@ -34,7 +34,7 @@ import colorlib.Swatch;
 public class SplitComplementary extends Palette
 {
 
-	public SplitComplementary( final PApplet parent)
+	public SplitComplementary( final PApplet parent )
 	{
 		super( parent );
 	}
