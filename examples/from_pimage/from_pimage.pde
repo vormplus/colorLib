@@ -7,17 +7,19 @@ PImage img;
 
 void setup()
 {
-    size( 200, 200 );
+    size( 2000, 200 );
     smooth();
     noStroke();
        
     img = loadImage("osaka-fluo.jpg");
-    p1 = new FromPImage( this, img );
+    // p1 = new FromPImage( this, img );
+    
+    p1 = new FromPImage( this ).setImage( img );    
 }
 
 void draw()
 {
     background( 0 );
-    translate( 10, 10 );
-    p1.drawSwatches();
+    // translate( 10, 10 );
+    p1.drawSwatches( 2000, 200 );
 }
