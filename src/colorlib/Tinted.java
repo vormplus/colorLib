@@ -44,11 +44,22 @@ public class Tinted extends Palette
 		super( parent );
 	}
 
+	/**
+	 * Creates a Tinted color palette with 6 colors, based on a given color. Mixes the original color with White.
+	 * @param parent
+	 */
+	
 	public Tinted( final PApplet parent, final int color )
 	{
 		super( parent );
 		createPalette( color );
 	}
+	
+	/**
+	 * Sets the color for the palette. This color will be used to create the other colors.
+	 * @param color
+	 * @return
+	 */
 	
 	public Tinted setColor( final int color )
 	{
