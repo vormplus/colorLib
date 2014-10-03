@@ -28,6 +28,7 @@
 package colorlib;
 
 import processing.core.*;
+
 import colorlib.Palette;
 import colorlib.Swatch;
 
@@ -50,11 +51,31 @@ public class FromPImage extends Palette
 		createPalette();
 	}
 
-/*	public FromPImage( final PApplet parent, final int color )
+	/**
+	 * Creates a Palette object from on a PImage. Duplicate colors are removed.
+	 * @param parent Reference to the main PApplet object.
+	 * @param img a Processing image.
+	 */
+	
+	public FromPImage( final PApplet parent )
 	{
 		super( parent );
-		createPalette( color );
-	} */
+		
+	}
+
+	/**
+	 * Sets the image to create a color palette from.
+	 * @param img
+	 * @return
+	 */
+	
+	public FromPImage setImage( final PImage img )
+	{
+		this.img = img;
+		createPalette();
+		
+		return this;
+	}
 	
 	@Override
 	public void createPalette()
@@ -62,10 +83,13 @@ public class FromPImage extends Palette
 		p.println( "Number of Pixels: " + img.pixels.length );
 		
 		for ( int i = 0; i < img.pixels.length; i++ ) {
-			swatches.add( new Swatch( p, img.pixels[i] ) );
+			swatches.add( new Swatch( p, img.pixels[ i ] ) );
 		}
 		
-		// removeDuplicateSwatches();	
+		removeDuplicateSwatches();
+		
+		p.println( "Total colors after deleting duplicates: " + swatches.size() );
 		
 	}
+	
 }
