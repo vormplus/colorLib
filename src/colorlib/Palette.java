@@ -29,7 +29,15 @@ package colorlib;
 
 import processing.core.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
+
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
 
 import colorlib.Swatch;
 
@@ -102,11 +110,28 @@ public class Palette
 
 	/**
 	 * Removes duplicate colors from the Palette
-s	 */
+	 */
 	
 	public void removeDuplicateSwatches()
 	{
-		notImplemented();
+	
+		HashSet hs = new HashSet();
+		
+		for ( Swatch s : swatches ) {
+			hs.add( new Integer( s.getColor() ) );
+		}
+
+		swatches = new ArrayList<Swatch>();
+		
+		Iterator iter = hs.iterator();
+		
+		int count = 0;
+		
+		while ( iter.hasNext() ) {
+			swatches.add( new Swatch( p, ((Integer) iter.next()).intValue() ) );
+			count++;
+		}
+
 	}
 	
 	/**
@@ -152,6 +177,7 @@ s	 */
 	 * @param colorNumber number of the color you want to get
 	 * @return
 	 */
+	
 	public int getColor( int colorNumber )
 	{
 		return swatches.get( colorNumber ).getColor();
@@ -190,14 +216,42 @@ s	 */
 	/**
 	 * Sorts the Swatches in the palette by hue
 	 */
+	
 	public void sortByHue()
 	{
 		notImplemented();
+		
+		// Code below doesn't work yet ??? Compiles fine but Throws NoSuchElementException in Processing
+		// Either this breaks or the sort() function.
+		
+		/*
+		Hashtable ht = new Hashtable();
+		
+		for ( Swatch s : swatches ) {
+			
+			Integer key = new Integer( (int)p.hue( s.getColor() ) );
+			
+			if ( ht.containsKey( key ) ) {
+				
+				((ArrayList) ht.get( key )).add( s );
+				
+			} else {
+				
+				ArrayList al = new ArrayList();
+				al.add( s );
+				ht.put( key, al );
+			}
+			
+		}
+		
+		sort( ht );
+		*/
 	}
 	
 	/**
 	 * Sorts the Swatches in the palette by saturation
 	 */
+	
 	public void sortBySaturation()
 	{
 		notImplemented();
@@ -222,7 +276,32 @@ s	 */
 	 */
 	private void sort( final Hashtable ht )
 	{
-		notImplemented();	
+		notImplemented();
+
+		// Code below doesn't work yet ??? Compiles fine but Throws NoSuchElementException in Processing
+		// Either this breaks or the sortByHue() function.
+		
+		/*
+		Vector v = new Vector( ht.keySet() );
+		
+		Collections.sort( v );
+		
+		int count = 0;
+		
+		Iterator iter = v.iterator();
+		
+		swatches = new ArrayList<Swatch>();
+		
+		while ( iter.hasNext() ) {
+			Integer key = (Integer) iter.next();
+			ArrayList al = (ArrayList) ht.get( key );
+			Iterator iter2 = al.iterator();
+			while ( iter2.hasNext() ) {
+				swatches.add( new Swatch( p, ((Integer) iter.next()).intValue() ) );
+			}
+		}
+		*/
+		
 	}
 
 	// --------------------------------------------------------------------
@@ -256,16 +335,6 @@ s	 */
 	}
 	
 	// --------------------------------------------------------------------
-
-	/**
-	 * Deletes all duplicate colors in the Palette
-	 */
-	public void deleteDuplicate()
-	{
-		notImplemented();
-	}
-	
-	// TODO: remove the notImplemented method when colorLib 2 is finished.
 	
 	/**
 	 * Private method used to print "method not implemented yet to the Processing console.
