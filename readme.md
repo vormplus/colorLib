@@ -1,6 +1,6 @@
 # colorLib 2.0, A color library for Processing.
 
-colorLib is a library for Processing that allows you to work with colors.
+colorLib is a library for Processing that allows you to work with colors. The [documentation](https://github.com/vormplus/colorLib/wiki) can be found on the wiki of this repository.
 
 Compiled and tested on Mac OS X 10.9.5 with Processing 2.2.1. The API of colorLib has changed a lot and is NOT compatible with colorLib 1.x.
 
