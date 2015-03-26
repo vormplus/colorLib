@@ -28,9 +28,9 @@
 package colorlib;
 
 import processing.core.*;
-
 import colorlib.Palette;
 import colorlib.Swatch;
+import colorlib.tools.MedianCut;
 
 public class FromPImage extends Palette
 {
@@ -63,6 +63,21 @@ public class FromPImage extends Palette
 		
 	}
 
+	public FromPImage( final PApplet parent, PImage img, int count )
+	{
+		super( parent );
+		
+		MedianCut mc = new MedianCut( parent );
+		
+		int[] newColors = mc.calc( img.pixels, count );
+
+		// p.println("New Colors: " + newColors.length );
+		
+		addColors( newColors );
+		
+	}
+	
+	
 	/**
 	 * Sets the image to create a color palette from.
 	 * @param img

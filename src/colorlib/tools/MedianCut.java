@@ -30,6 +30,7 @@ package colorlib.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import processing.core.*;
@@ -39,7 +40,7 @@ public class MedianCut
 
 	private Hashtable histogram;
 	
-//	private Cube[] cubes;
+	private Cube[] cubes;
 	
 	protected PApplet p;
 	
@@ -50,36 +51,123 @@ public class MedianCut
 		p = parent;
 	}
 	
-/*	
+	
 	public int[] calc( int[] colors, int cnt )
 	{
+			
 		histogram = new Hashtable();
 		
-		for ( int i = 0; i < colors.length; i++ ) {
-			
-			Integer color = new Integer( colors[ i ] );
-			if ( histogram.containsKey( color ) ) {		
-				histogram.put( color, new Integer( ( (Integer) histogram.get( color ) ).intValue() + 1 ) );
+		for (int i = 0; i < colors.length; i++) {
+			Integer color = new Integer(colors[i]);
+			if (histogram.containsKey(color)) {
+				histogram.put(color, new Integer(((Integer) histogram
+						.get(color)).intValue() + 1));
 			} else {
-				histogram.put( color, new Integer( 1 ) );
+				histogram.put(color, new Integer(1));
 			}
-			
 		}
 		
-		// dummy values...
-		int[] x = new int[1];
+		HashSet h = new HashSet();
 		
-		return x;
+		for (int i = 0; i < colors.length; i++) {
+			h.add(new Integer(colors[i]));
+		}
+		
+		colors = new int[h.size()];
+		Iterator iter = h.iterator();	
+		int cnter = 0;
+		while (iter.hasNext()) {
+			colors[cnter] = ((Integer) iter.next()).intValue();
+			cnter++;
+		}
+		
+		int ncubes = 0;
+		Cube cube = new Cube(colors, 0);
+		cube.level = 0;
+		shrink(cube);
+		cubes = new Cube[cnt];
+		cubes[ncubes++] = cube;
+		
+		while (ncubes < cnt) {
+			int nextCube = -1, colorCnt = 1;
+			for (int i = 0; i < ncubes; i++) {
+				int length = cubes[i].count;
+
+				if (length > colorCnt) {
+					colorCnt = length;
+					nextCube = i;
+				}
+			}
+			if (nextCube == -1) {
+				break;
+			}
+			cube = cubes[nextCube];
+			int lr = cube.rmax - cube.rmin;
+			int lg = cube.gmax - cube.gmin;
+			int lb = cube.bmax - cube.bmin;
+			if (lr > lg && lr > lb) {
+				cube.sort(0);
+			} else if (lg > lb) {
+				cube.sort(1);
+			} else {
+				cube.sort(2);
+			}
+			cubes[ncubes++] = cube.split();
+		}
+		
+		int[] result = new int[ncubes];
+		for (int i = 0; i < ncubes; i++) {
+			result[i] = cubes[i].getAverage();
+		}
+		
+		return result;
 		
 	}
-*/	
+
+	private void shrink(Cube cube)
+	{
+		int r, g, b;
+		int color;
+		int rmin, rmax, gmin, gmax, bmin, bmax;
+
+		rmin = 255;
+		rmax = 0;
+		gmin = 255;
+		gmax = 0;
+		bmin = 255;
+		bmax = 0;
+		for (int i = 0; i < cube.colors.length; i++) {
+			color = cube.colors[i];
+			r = color >> 16 & 0xFF;
+			g = color >> 8 & 0xFF;
+			b = color & 0xFF;
+
+			if (r > rmax)
+				rmax = r;
+			if (r < rmin)
+				rmin = r;
+			if (g > gmax)
+				gmax = g;
+			if (g < gmin)
+				gmin = g;
+			if (b > bmax)
+				bmax = b;
+			if (b < bmin)
+				bmin = b;
+		}
+		cube.rmin = rmin;
+		cube.rmax = rmax;
+		cube.gmin = gmin;
+		cube.gmax = gmax;
+		cube.bmin = bmin;
+		cube.bmax = bmax;
+	}
+	
 	
 	/**
 	 * Cube Class
-	 * @author janvantomme
-	 *
 	 */
-/*	
+	
 	private class Cube
 	{
 		int level;
@@ -118,10 +206,10 @@ public class MedianCut
 					
 				} else {
 					
-					ArrayList l = new ArrayList();
-					l.add(new Integer(colors[i]));
-					sortTable.put(sortKey, l);
-					sort.add(sortKey);
+					ArrayList l = new ArrayList<Integer>();
+					l.add( new Integer( colors[ i ] ) );
+					sortTable.put( sortKey, l );
+					sort.add( sortKey );
 				}
 				
 				ArrayList a = new ArrayList( sortTable.keySet() );
@@ -199,6 +287,6 @@ public class MedianCut
 			
 		}
 		
-	} */
+	}
 	
 }

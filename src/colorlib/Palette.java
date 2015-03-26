@@ -40,6 +40,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import colorlib.Swatch;
+import colorlib.tools.MedianCut;
 
 public class Palette
 {
@@ -70,6 +71,32 @@ public class Palette
 		swatches = new ArrayList<Swatch>();
 		
 		addColors( colors );
+	}
+	
+	/**
+	 * 
+	 * @param parent reference to the main PApplet oject
+	 * @param colors Array of Processing colors
+	 * @param count Number of colors in the final Palette
+	 */
+	public Palette( final PApplet parent, int[] colors, int count )
+	{
+		MedianCut mc = new MedianCut( parent );
+		
+		int[] newColors = mc.calc( colors, count );
+		
+		// swatches = new Swatch[ colors.length ];
+		
+		addColors( newColors );
+		
+		/*
+		for (int i = 0; i < colors.length; i++) {
+			
+			PApplet.println(colors[i]);
+			
+			swatches[ i ] = new Swatch( p, colors[ i ] );
+		} */
+		
 	}
 	
 	/**
