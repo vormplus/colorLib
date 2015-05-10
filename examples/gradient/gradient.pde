@@ -15,14 +15,14 @@ void setup()
     colors[0] = color( 255, 0, 255 );
     colors[1] = color( 255, 255, 0 );
     
-    p1 = new Gradient( this ).setColors( colors ).setSteps( 16 );
+    p1 = new Gradient( this ).addColors( colors ).setSteps( 16 );
 
     color[] colors2 = new color[ 3 ];
     colors2[0] = color( 0, 0, 255 );
     colors2[1] = color( 255, 255, 0 );
     colors2[2] = color( 255 );
     
-    p2 = new Gradient( this ).setColors( colors2 ).setSteps( 128 );
+    p2 = new Gradient( this ).addColors( colors2 ).setSteps( 128 );
 }
 
 void draw()
