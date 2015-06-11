@@ -27,6 +27,9 @@
 
 package colorlib.webservices;
 
+import java.io.*;
+import java.net.*;
+
 import java.util.ArrayList;
 
 import processing.core.*;
@@ -104,30 +107,63 @@ public class ColourLovers extends WebService
 	{
 		String feedURL = new StringBuffer( COLOURLOVERS_API_URL ).append( query ).toString();
 		
-		if ( DEBUG ) {
-			System.out.println( feedURL );
-		}
-		
 		ArrayList<Palette> out = new ArrayList<Palette>();
 		
-		jsonFeed = new JSONArray( p.createReader( feedURL ) );
-	
-		for ( int i = 0; i < jsonFeed.size(); i++ ) {
+		if ( DEBUG ) {
+			System.out.println( feedURL );
+			System.out.println( "--------------------------------" );
+		}
+
+		try {
+
+			// The Processing createReader() method doesn't add an User-Agent string,
+			// so the ColourLovers API returns a HTTP 403 status code since they block the default Java User-Agent.
+			// This block of code creates a request by setting a fake User-Agent string so or Processing app will act like a
+			// real browser, and the ColourLovers API returns the JSON we need.
 			
-			JSONObject paletteObject = jsonFeed.getJSONObject( i );
-			JSONArray colorsArray = paletteObject.getJSONArray( "colors" );
+			URL url = new URL( feedURL );
+			URLConnection connection = url.openConnection();
+			connection.setRequestProperty( "User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; en-US) AppleWebKit/532.5 (KHTML, like Gecko) Chrome/4.0.249.0 Safari/532.5" );
 			
-			Palette palette = new Palette( p );
+			InputStream response = connection.getInputStream();
 			
-			for ( int j = 0; j < colorsArray.size(); j++ ) {
-				int c = PApplet.unhex( "FF" + colorsArray.getString( j ) );
-				palette.addColor( c );
+			Reader in = new InputStreamReader( response );
+			
+			jsonFeed = new JSONArray( in );
+			
+			for ( int i = 0; i < jsonFeed.size(); i++ ) {
+				
+				JSONObject paletteObject = jsonFeed.getJSONObject( i );
+				JSONArray colorsArray = paletteObject.getJSONArray( "colors" );
+				
+				Palette palette = new Palette( p );
+				
+				for ( int j = 0; j < colorsArray.size(); j++ ) {
+					int c = PApplet.unhex( "FF" + colorsArray.getString( j ) );
+					palette.addColor( c );
+				}
+				
+				out.add( palette );
+				
 			}
 			
-			out.add( palette );
+			in.close();
+
+			if ( DEBUG ) {
+				System.out.println( jsonFeed );
+				System.out.println( "--------------------------------" );
+			}
+						
+		} catch ( MalformedURLException e ) {
+			
+			System.out.println( e );
+			
+		} catch ( IOException e ) {
+
+			System.out.println( e );
 			
 		}
-		
+
 		return out;
 	}
 	
